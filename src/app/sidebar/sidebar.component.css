@@ -1,0 +1,52 @@
+.box {
+  border-right: 1px solid #d2d2d2;
+  max-width: 33%;
+  height: 100vh;
+}
+.titletext {
+  color: #48c15b;
+  font-family: Inter;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.it {
+  color: #000;
+  font-family: Inter;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.titlebox {
+  padding-top: 5vh;
+  margin-bottom: 20px;
+  padding-left: 2vh;
+  border: solid blue 5px;
+}
+.btnbox {
+  display: flex;
+  width: 200px;
+  height: 48px;
+  padding: 15px 0px;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+button {
+  width: 202px;
+  flex-shrink: 0;
+}
+
+.profile {
+  display: flex;
+  width: 244px;
+  padding: 11px 16px;
+  align-items: flex-end;
+  gap: 10px;
+  border: solid red 10px;
+}
