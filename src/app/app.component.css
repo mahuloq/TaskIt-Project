@@ -1,0 +1,4 @@
+.tasks {
+  width: calc(100%-260px);
+  margin-left: 260px;
+}

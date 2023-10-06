@@ -4,14 +4,10 @@
     <div class="mainbtn btn btn-success">Task List</div>
   </div>
   <div class="profile">
-    <img
-      class="profilePic"
-      src="https://ih1.redbubble.net/image.1362253646.0602/st,small,845x845-pad,1000x1000,f8f8f8.jpg"
-      alt=""
-    />
+    <img class="profilePic" [src]="userImage" alt="" />
     <div class="profbox">
-      <div class="name">Mark</div>
-      <div class="email">mark@gmail.com</div>
+      <div class="name">{{ userName }}</div>
+      <div class="email">{{ userEmail }}</div>
     </div>
   </div>
 </div>
