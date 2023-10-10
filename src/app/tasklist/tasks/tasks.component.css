@@ -1,0 +1,8 @@
+.taskHolder {
+  display: flex;
+}
+
+.taskHolder .insideTask {
+  width: 20.5%;
+  border-right: solid red 1px;
+}

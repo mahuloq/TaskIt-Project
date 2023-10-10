@@ -14,3 +14,28 @@
   font-weight: 590;
   line-height: normal;
 }
+
+.taskbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.main {
+  padding: 50px;
+}
+
+.table {
+  border: solid 5px gainsboro;
+  margin-top: 5px;
+  height: 35vw;
+}
+
+.titleLine {
+  display: flex;
+  border-bottom: solid gainsboro 5px;
+  padding-left: 25px;
+}
+
+.titleLine .titleContent {
+  flex: 1;
+}

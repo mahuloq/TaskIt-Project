@@ -4,18 +4,34 @@
     <div class="filterbox">
       <label for="filter"><span class="filtertext">Filters:</span></label>
       <select name="status" id="">
+        <option value="" disabled="true" selected="true">Status</option>
         <option value="open">Open</option>
         <option value="closed">Closed</option>
       </select>
       <select name="date" id="">
-        <option value="calender">Date</option>
+        <option value="calender" disabled="true" selected="true">Date</option>
       </select>
       <select name="priority" id="">
+        <option value="" disabled="true" selected="true">Priority</option>
         <option value="low">Low</option>
         <option value="medium">Medium</option>
         <option value="high">High</option>
       </select>
     </div>
+    <div class="addTask">
+      <button class="btn btn-primary" (click)="openTasks()">
+        Add New Task
+      </button>
+    </div>
   </div>
-  <div class="table"></div>
+  <div class="table">
+    <div class="titleLine">
+      <div class="titleContent">Title</div>
+      <div class="titleContent">Due Date</div>
+      <div class="titleContent">Priority</div>
+      <div class="titleContent">Status</div>
+      <div class="titleContent">Actions</div>
+    </div>
+    <app-tasks [test]="taskState"></app-tasks>
+  </div>
 </div>

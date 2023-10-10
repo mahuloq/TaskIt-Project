@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-xs-10">
+    <app-tasks-edit
+      (taskAdded)="onTaskAdded($event)"
+      *ngIf="test === 'open'"
+    ></app-tasks-edit>
+    <hr />
+    <ul class="list-group">
+      <a
+        class="list-group-item"
+        style="cursor: pointer"
+        *ngFor="let tasks of task"
+        ><div class="taskHolder">
+          <div class="insideTask">
+            {{ tasks.title }}
+          </div>
+          <div class="insideTask">{{ tasks.dueDate }}</div>
+          <div class="insideTask">{{ tasks.priority }}</div>
+          <div class="insideTask">{{ tasks.status }}</div>
+        </div>
+      </a>
+    </ul>
+  </div>
+</div>
