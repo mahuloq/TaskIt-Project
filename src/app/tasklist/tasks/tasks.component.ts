@@ -1,21 +1,29 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Task } from 'src/app/shared/task.model';
+import { TaskService } from 'src/app/shared/taskService.service';
 
 @Component({
   selector: 'app-tasks',
   templateUrl: './tasks.component.html',
   styleUrls: ['./tasks.component.css'],
 })
-export class TasksComponent {
-  @Input() test: string;
+export class TasksComponent implements OnInit {
+  // @Input() state: string;
+  taskState = '';
 
-  task: Task[] = [
-    new Task('Mow Lawn', 'new Date()', 'High', 'Open'),
-    new Task('Clean Room', 'new Date()', 'Medium', 'Open'),
-    new Task('Become Genius Coder', 'new Date()', 'Low', 'Closed'),
-  ];
+  task: Task[] = [];
 
-  onTaskAdded(tasks: Task) {
-    this.task.push(tasks);
+  constructor(private taskService: TaskService) {}
+
+  ngOnInit(): void {
+    this.task = this.taskService.getTasks();
+    this.taskService.taskListChanged.subscribe((task) => (this.task = task));
+    this.taskService.taskStateChange.subscribe(
+      (taskStatus) => (this.taskState = taskStatus)
+    );
+  }
+
+  openEdit() {
+    console.log('test');
   }
 }

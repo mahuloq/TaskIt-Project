@@ -6,6 +6,7 @@ import {
   EventEmitter,
 } from '@angular/core';
 import { Task } from 'src/app/shared/task.model';
+import { TaskService } from 'src/app/shared/taskService.service';
 
 @Component({
   selector: 'app-tasks-edit',
@@ -24,6 +25,8 @@ export class TasksEditComponent {
     status: string;
   }>();
 
+  constructor(private taskService: TaskService) {}
+
   onAddItem() {
     const tskTitle = this.titleInputRef.nativeElement.value;
     const tskdueDate = this.dueDateInputRef.nativeElement.value;
@@ -31,7 +34,9 @@ export class TasksEditComponent {
     const tskStatus = this.statusInputRef.nativeElement.value;
     const newTask = new Task(tskTitle, tskdueDate, tskPriority, tskStatus);
 
-    this.taskAdded.emit(newTask);
+    this.taskService.saveTask(newTask);
     document.forms['taskForm'].reset();
+
+    // this.taskAdded.emit(newTask);
   }
 }

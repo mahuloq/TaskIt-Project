@@ -6,3 +6,10 @@
   width: 20.5%;
   border-right: solid red 1px;
 }
+
+li {
+  float: left;
+  margin-left: 0;
+  padding-right: 10px;
+  list-style: none;
+}
