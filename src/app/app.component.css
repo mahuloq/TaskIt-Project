@@ -2,3 +2,13 @@
   width: calc(100%-260px);
   margin-left: 260px;
 }
+
+@media screen and (max-width: 770px) {
+  .sidebar {
+    display: none;
+  }
+  .tasks {
+    width: 0px;
+    margin-left: 0px;
+  }
+}

@@ -25,7 +25,6 @@
 }
 
 .table {
-  border: solid 5px gainsboro;
   margin-top: 5px;
   height: 35vw;
 }
@@ -38,4 +37,17 @@
 
 .titleLine .titleContent {
   flex: 1;
+}
+
+@media screen and (max-width: 770px) {
+  .main {
+    width: 100vw;
+  }
+  .titleLine {
+    padding-left: 0px;
+  }
+
+  .tabletext {
+    font-size: 15px;
+  }
 }

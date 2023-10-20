@@ -23,7 +23,17 @@ export class TasksComponent implements OnInit {
     );
   }
 
-  openEdit() {
-    console.log('test');
+  viewTask() {
+    console.log('View Test');
+  }
+
+  openEdit(i) {
+    console.log('Edit Test');
+    this.taskService.taskStateEdit(i);
+  }
+
+  deleteTask(i) {
+    console.log('Delete Test');
+    this.taskService.removeTask(i);
   }
 }

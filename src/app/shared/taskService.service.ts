@@ -6,12 +6,15 @@ export class TaskService {
   taskSelected = new EventEmitter<Task>();
   taskListChanged = new EventEmitter<Task[]>();
   taskStateChange = new EventEmitter<string>();
+  // indexStateChange = new EventEmitter<number>();
+
   taskState = '';
+  storedIndex = '';
 
   allTasks: Task[] = [
-    new Task('Mow Lawn', 'new Date()', 'High', 'Open'),
-    new Task('Clean Room', 'new Date()', 'Medium', 'Open'),
-    new Task('Become Genius Coder', 'new Date()', 'Low', 'Closed'),
+    new Task('Mow Lawn', '11/17/23', 'High', 'Open', 'test'),
+    new Task('Clean Room', '11/17/23', 'Medium', 'Open', 'test 2'),
+    new Task('Become Genius', '11/17/23', 'Low', 'Closed', 'test 3'),
   ];
 
   getTasks() {
@@ -22,7 +25,7 @@ export class TaskService {
     this.taskSelected.emit(task);
   }
 
-  removeBook(id: number) {
+  removeTask(id: number) {
     this.allTasks.splice(id, 1);
     this.taskListChanged.emit(this.getTasks());
   }
@@ -34,6 +37,12 @@ export class TaskService {
     this.taskStateChange.emit(this.taskState);
   }
   taskStateOpen() {
+    this.taskState = 'open';
+    this.taskStateChange.emit(this.taskState);
+  }
+
+  taskStateEdit(i) {
+    this.storedIndex = i;
     this.taskState = 'open';
     this.taskStateChange.emit(this.taskState);
   }

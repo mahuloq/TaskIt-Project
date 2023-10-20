@@ -3,8 +3,8 @@
 }
 
 .taskHolder .insideTask {
-  width: 20.5%;
-  border-right: solid red 1px;
+  width: 20%;
+  /* border-right: solid red 1px; */
 }
 
 li {

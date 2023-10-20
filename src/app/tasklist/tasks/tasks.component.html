@@ -6,7 +6,7 @@
       <a
         class="list-group-item"
         style="cursor: pointer"
-        *ngFor="let tasks of task"
+        *ngFor="let tasks of task; let i = index"
         ><div class="taskHolder">
           <div class="insideTask">
             {{ tasks.title }}
@@ -15,9 +15,9 @@
           <div class="insideTask">{{ tasks.priority }}</div>
           <div class="insideTask">{{ tasks.status }}</div>
           <ul class="insideTask">
-            <li>View</li>
+            <li (click)="viewTask()">View</li>
             <li (click)="openEdit()">Edit</li>
-            <li>Delete</li>
+            <li (click)="deleteTask()">Delete</li>
           </ul>
         </div>
       </a>
