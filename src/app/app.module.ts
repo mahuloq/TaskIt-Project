@@ -7,7 +7,8 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { TasklistComponent } from './tasklist/tasklist.component';
 import { TasksComponent } from './tasklist/tasks/tasks.component';
 import { TasksEditComponent } from './tasklist/tasks/tasks-edit/tasks-edit.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveTasksComponent } from './tasklist/tasks/reactive-tasks/reactive-tasks.component';
 
 @NgModule({
   declarations: [
@@ -16,8 +17,9 @@ import { FormsModule } from '@angular/forms';
     TasklistComponent,
     TasksComponent,
     TasksEditComponent,
+    ReactiveTasksComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
   bootstrap: [AppComponent],
 })

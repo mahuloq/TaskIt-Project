@@ -6,10 +6,10 @@ export class TaskService {
   taskSelected = new EventEmitter<Task>();
   taskListChanged = new EventEmitter<Task[]>();
   taskStateChange = new EventEmitter<string>();
-  // indexStateChange = new EventEmitter<number>();
+  indexStateChange = new EventEmitter<number>();
 
   taskState = '';
-  storedIndex = '';
+  storedIndex;
 
   allTasks: Task[] = [
     new Task('Mow Lawn', '11/17/23', 'High', 'Open', 'test'),
@@ -45,5 +45,6 @@ export class TaskService {
     this.storedIndex = i;
     this.taskState = 'open';
     this.taskStateChange.emit(this.taskState);
+    this.indexStateChange.emit(this.storedIndex);
   }
 }

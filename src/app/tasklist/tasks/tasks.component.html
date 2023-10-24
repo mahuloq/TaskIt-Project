@@ -1,6 +1,7 @@
 <div class="row">
   <div class="col-xs-10">
-    <app-tasks-edit *ngIf="taskState === 'open'"></app-tasks-edit>
+    <!-- <app-tasks-edit *ngIf="taskState === 'open'"></app-tasks-edit> -->
+    <app-reactive-tasks *ngIf="taskState === 'open'"></app-reactive-tasks>
     <hr />
     <ul class="list-group">
       <a
@@ -16,8 +17,8 @@
           <div class="insideTask">{{ tasks.status }}</div>
           <ul class="insideTask">
             <li (click)="viewTask()">View</li>
-            <li (click)="openEdit()">Edit</li>
-            <li (click)="deleteTask()">Delete</li>
+            <li (click)="openEdit(i)">Edit</li>
+            <li (click)="deleteTask(i)">Delete</li>
           </ul>
         </div>
       </a>
