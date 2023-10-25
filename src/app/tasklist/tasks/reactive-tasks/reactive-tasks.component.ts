@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Task } from 'src/app/shared/task.model';
 import { TaskService } from 'src/app/shared/taskService.service';
 
@@ -11,27 +11,28 @@ import { TaskService } from 'src/app/shared/taskService.service';
 export class ReactiveTasksComponent implements OnInit {
   taskForm: FormGroup;
   onFormSubmit = false;
+  taskEdit = false;
   taskIndex;
-  // allTasks: Task[] = [
-  //   new Task('Mow Lawn', '11/17/23', 'High', 'Open', 'test'),
-  //   new Task('Clean Room', '11/17/23', 'Medium', 'Open', 'test 2'),
-  //   new Task('Become Genius', '11/17/23', 'Low', 'Closed', 'test 3'),
-  // ];
+  view = false;
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
     this.taskForm = new FormGroup({
-      title: new FormControl(null),
-      dueDate: new FormControl(null),
-      priority: new FormControl(null),
+      title: new FormControl(null, Validators.required),
+      dueDate: new FormControl(null, Validators.required),
+      priority: new FormControl(null, Validators.required),
       status: new FormControl(null),
-      description: new FormControl(null),
+      description: new FormControl(null, [
+        Validators.required,
+        Validators.minLength(3),
+      ]),
     });
 
-    this.taskService.indexStateChange.subscribe(
-      (storedIndex) => this.taskIndex
-    );
+    this.taskService.indexStateChange
+      .subscribe
+      // (storedIndex) =>();
+      ();
   }
   onSubmit() {
     this.onFormSubmit = true;
@@ -49,7 +50,29 @@ export class ReactiveTasksComponent implements OnInit {
       tskDescript
     );
 
-    this.taskService.saveTask(newTask);
+    if (this.taskEdit) {
+      this.taskService.taskStateEdit(newTask, this.taskIndex);
+      this.taskIndex = '';
+      this.taskEdit = false;
+    } else {
+      this.taskService.saveTask(newTask);
+    }
     this.taskForm.reset();
+  }
+
+  onEdit(task: Task, index: number, view) {
+    this.view = view;
+    this.taskService.taskStateOpen();
+    this.taskEdit = true;
+    console.log(index);
+    console.log(task);
+    this.taskIndex = index;
+    this.taskForm.patchValue({
+      title: task.title,
+      dueDate: task.dueDate,
+      priority: task.priority,
+      status: task.status,
+      description: task.description,
+    });
   }
 }

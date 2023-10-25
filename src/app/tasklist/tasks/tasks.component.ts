@@ -9,15 +9,15 @@ import { TaskService } from 'src/app/shared/taskService.service';
 })
 export class TasksComponent implements OnInit {
   // @Input() state: string;
-  taskState = '';
+  taskState = 'closed';
 
-  task: Task[] = [];
+  tasks = <Task[]>[];
 
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
-    this.task = this.taskService.getTasks();
-    this.taskService.taskListChanged.subscribe((task) => (this.task = task));
+    this.tasks = this.taskService.getTasks();
+    this.taskService.taskListChanged.subscribe((task) => (this.tasks = task));
     this.taskService.taskStateChange.subscribe(
       (taskStatus) => (this.taskState = taskStatus)
     );
@@ -27,9 +27,9 @@ export class TasksComponent implements OnInit {
     console.log('View Test');
   }
 
-  openEdit(i) {
-    console.log('Edit Test');
-    this.taskService.taskStateEdit(i);
+  openEdit(form, i, view: boolean) {
+    form.onEdit(this.tasks[i], i, view);
+    // this.taskService.taskStateEdit(i);
   }
 
   deleteTask(i) {

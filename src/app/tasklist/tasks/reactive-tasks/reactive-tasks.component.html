@@ -9,6 +9,8 @@
             type="text"
             class="form-control"
             id="title"
+            name="title"
+            [readOnly]="view"
           />
         </div>
         <div class="col-sm-2 form-group">
@@ -18,6 +20,8 @@
             type="text"
             class="form-control"
             id="dueDate"
+            name="dueDate"
+            [readOnly]="view"
           />
         </div>
         <div class="col-sm-2 form-group">
@@ -27,16 +31,19 @@
             type="text"
             class="form-control"
             id="priority"
+            name="priority"
+            [readOnly]="view"
           />
         </div>
         <div class="col-sm-2 form-group">
           <label for="status">Status</label>
           <input
             formControlName="status"
-            value="test"
-            type="text"
-            class="form-control"
+            type="checkbox"
+            class="form-check-input"
             id="status"
+            name="status"
+            [readOnly]="view"
           />
         </div>
         <div class="textarea col-sm-2 form-group">
@@ -46,12 +53,26 @@
             type="text"
             class="form-control"
             id="description"
+            name="description"
+            [readOnly]="view"
           />
+          <div *ngIf="!taskForm.valid && taskForm.touched">
+            <div *ngIf="description.errors?.['required']">
+              Please Enter a Description
+            </div>
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-cs-12">
-          <button class="btn btn-success" type="submit">Add</button>
+          <button
+            *ngIf="view === false"
+            class="btn btn-success"
+            type="submit"
+            [disabled]="!taskForm.valid"
+          >
+            {{ taskEdit ? "Update" : "Add" }}
+          </button>
         </div>
       </div>
     </form>

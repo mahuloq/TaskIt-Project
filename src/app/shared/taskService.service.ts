@@ -12,13 +12,17 @@ export class TaskService {
   storedIndex;
 
   allTasks: Task[] = [
-    new Task('Mow Lawn', '11/17/23', 'High', 'Open', 'test'),
-    new Task('Clean Room', '11/17/23', 'Medium', 'Open', 'test 2'),
-    new Task('Become Genius', '11/17/23', 'Low', 'Closed', 'test 3'),
+    new Task('Mow Lawn', '11/17/23', 'High', false, 'test'),
+    new Task('Clean Room', '11/17/23', 'Medium', false, 'test 2'),
+    new Task('Become Genius', '11/17/23', 'Low', false, 'test 3'),
   ];
 
   getTasks() {
     return [...this.allTasks];
+  }
+
+  getTask(index: number) {
+    // return this.allTasks(index).slice()
   }
 
   selectTask(task: Task) {
@@ -32,19 +36,21 @@ export class TaskService {
 
   saveTask(task: Task) {
     this.allTasks.push(task);
-    this.taskListChanged.emit(this.getTasks());
     this.taskState = 'closed';
     this.taskStateChange.emit(this.taskState);
+    this.taskListChanged.emit(this.getTasks());
   }
   taskStateOpen() {
     this.taskState = 'open';
     this.taskStateChange.emit(this.taskState);
   }
 
-  taskStateEdit(i) {
-    this.storedIndex = i;
-    this.taskState = 'open';
+  taskStateEdit(task, index) {
+    console.log(task);
+    console.log(index);
+    this.allTasks[index] = task;
+    this.taskState = 'closed';
     this.taskStateChange.emit(this.taskState);
-    this.indexStateChange.emit(this.storedIndex);
+    this.taskListChanged.emit(this.getTasks());
   }
 }

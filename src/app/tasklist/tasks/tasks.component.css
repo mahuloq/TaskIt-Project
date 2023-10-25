@@ -13,3 +13,15 @@ li {
   padding-right: 10px;
   list-style: none;
 }
+
+.strikethrough {
+  text-decoration: line-through;
+}
+
+.highlight-closed {
+  color: red;
+}
+
+.highlight-open {
+  color: green;
+}
