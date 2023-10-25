@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Task } from 'src/app/shared/task.model';
 import { TaskService } from 'src/app/shared/taskService.service';
@@ -19,13 +19,23 @@ export class ReactiveTasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskForm = new FormGroup({
-      title: new FormControl(null, Validators.required),
-      dueDate: new FormControl(null, Validators.required),
-      priority: new FormControl(null, Validators.required),
+      title: new FormControl(null, [
+        Validators.required,
+        this.noWhitespaceValidator,
+      ]),
+      dueDate: new FormControl(null, [
+        Validators.required,
+        this.noWhitespaceValidator,
+      ]),
+      priority: new FormControl(null, [
+        Validators.required,
+        this.noWhitespaceValidator,
+      ]),
       status: new FormControl(null),
       description: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
+        this.noWhitespaceValidator,
       ]),
     });
 
@@ -74,5 +84,8 @@ export class ReactiveTasksComponent implements OnInit {
       status: task.status,
       description: task.description,
     });
+  }
+  public noWhitespaceValidator(control: FormControl) {
+    return (control.value || '').trim().length ? null : { whitespace: true };
   }
 }

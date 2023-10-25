@@ -1,0 +1,7 @@
+input.ng-touched.ng-invalid {
+  border: 1px solid red;
+}
+
+.warningText {
+  color: rgba(236, 9, 9, 0.986);
+}

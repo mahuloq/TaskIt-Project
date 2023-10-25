@@ -13,6 +13,14 @@
             [readOnly]="view"
           />
         </div>
+        <div *ngIf="!taskForm.valid && taskForm.get('title').touched">
+          <div
+            *ngIf="taskForm.get('title').errors?.['required']"
+            class="warningText"
+          >
+            Please Enter a title.
+          </div>
+        </div>
         <div class="col-sm-2 form-group">
           <label for="dueDate">Due Date</label>
           <input
@@ -24,6 +32,14 @@
             [readOnly]="view"
           />
         </div>
+        <div *ngIf="!taskForm.valid && taskForm.get('dueDate').touched">
+          <div
+            *ngIf="taskForm.get('dueDate').errors?.['required']"
+            class="warningText"
+          >
+            Please Enter a Due Date
+          </div>
+        </div>
         <div class="col-sm-2 form-group">
           <label for="priority">Priority</label>
           <input
@@ -34,6 +50,14 @@
             name="priority"
             [readOnly]="view"
           />
+          <div *ngIf="!taskForm.valid && taskForm.get('priority').touched">
+            <div
+              *ngIf="taskForm.get('priority').errors?.['required']"
+              class="warningText"
+            >
+              Please Enter a Priority
+            </div>
+          </div>
         </div>
         <div class="col-sm-2 form-group">
           <label for="status">Status</label>
@@ -46,6 +70,7 @@
             [readOnly]="view"
           />
         </div>
+
         <div class="textarea col-sm-2 form-group">
           <label for="description">Description</label>
           <input
@@ -56,9 +81,18 @@
             name="description"
             [readOnly]="view"
           />
-          <div *ngIf="!taskForm.valid && taskForm.touched">
-            <div *ngIf="description.errors?.['required']">
+          <div *ngIf="!taskForm.valid && taskForm.get('description').touched">
+            <div
+              *ngIf="taskForm.get('description').errors?.['required']"
+              class="warningText"
+            >
               Please Enter a Description
+            </div>
+            <div
+              *ngIf="taskForm.get('description').errors?.['minlength']"
+              class="warningText"
+            >
+              Minimum Length of Three
             </div>
           </div>
         </div>
