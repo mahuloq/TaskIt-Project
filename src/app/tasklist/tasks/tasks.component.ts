@@ -33,7 +33,11 @@ export class TasksComponent implements OnInit {
   }
 
   deleteTask(i) {
-    console.log('Delete Test');
-    this.taskService.removeTask(i);
+    if (!confirm('Are you sure you want to delete this?')) {
+      return;
+    } else {
+      console.log('Delete Test');
+      this.taskService.removeTask(i);
+    }
   }
 }
