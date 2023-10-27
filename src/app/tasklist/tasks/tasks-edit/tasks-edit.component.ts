@@ -15,6 +15,8 @@ import { TaskService } from 'src/app/shared/taskService.service';
   styleUrls: ['./tasks-edit.component.css'],
 })
 export class TasksEditComponent implements OnInit {
+  indexValue = '';
+
   @ViewChild('titleInput') titleInputRef: ElementRef;
   @ViewChild('dueDateInput') dueDateInputRef: ElementRef;
   @ViewChild('priorityInput') priorityInputRef: ElementRef;
@@ -32,7 +34,11 @@ export class TasksEditComponent implements OnInit {
 
   constructor(private taskService: TaskService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.taskService.taskStateChange.subscribe(
+      (taskStatus) => (this.indexValue = taskStatus)
+    );
+  }
 
   onAddItem() {
     const tskTitle = this.titleInputRef.nativeElement.value;

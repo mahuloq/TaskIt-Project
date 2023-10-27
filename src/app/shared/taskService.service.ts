@@ -46,8 +46,6 @@ export class TaskService {
   }
 
   taskStateEdit(task, index) {
-    console.log(task);
-    console.log(index);
     this.allTasks[index] = task;
     this.taskState = 'closed';
     this.taskStateChange.emit(this.taskState);
