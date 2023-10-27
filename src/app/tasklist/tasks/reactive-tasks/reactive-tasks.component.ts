@@ -27,10 +27,7 @@ export class ReactiveTasksComponent implements OnInit {
         Validators.required,
         this.noWhitespaceValidator,
       ]),
-      priority: new FormControl(null, [
-        Validators.required,
-        this.noWhitespaceValidator,
-      ]),
+      priority: new FormControl(null),
       status: new FormControl(null),
       description: new FormControl(null, [
         Validators.required,
@@ -47,18 +44,28 @@ export class ReactiveTasksComponent implements OnInit {
   onSubmit() {
     this.onFormSubmit = true;
 
-    const tskTitle = this.taskForm.value.title;
-    const tskdueDate = this.taskForm.value.dueDate;
-    const tskPriority = this.taskForm.value.priority;
-    const tskStatus = this.taskForm.value.status;
-    const tskDescript = this.taskForm.value.description;
-    const newTask = new Task(
-      tskTitle,
-      tskdueDate,
-      tskPriority,
-      tskStatus,
-      tskDescript
-    );
+    const newTask = { ...this.taskForm.value };
+
+    // const newTask = new Task(
+    //   this.taskForm.value['title'],
+    //   this.taskForm.value['dueDate'],
+    //   this.taskForm.value['priority'],
+    //   this.taskForm.value['status'],
+    //   this.taskForm.value['description']
+    // );
+
+    // const tskTitle = this.taskForm.value.title;
+    // const tskdueDate = this.taskForm.value.dueDate;
+    // const tskPriority = this.taskForm.value.priority;
+    // const tskStatus = this.taskForm.value.status;
+    // const tskDescript = this.taskForm.value.description;
+    // const newTask = new Task(
+    //   tskTitle,
+    //   tskdueDate,
+    //   tskPriority,
+    //   tskStatus,
+    //   tskDescript
+    // );
 
     if (this.taskEdit) {
       this.taskService.taskStateEdit(newTask, this.taskIndex);

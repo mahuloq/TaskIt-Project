@@ -3,101 +3,118 @@
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
       <div class="row">
         <div class="col-sm-5 form-group">
-          <label for="title">Title</label>
-          <input
-            formControlName="title"
-            type="text"
-            class="form-control"
-            id="title"
-            name="title"
-            [readOnly]="view"
-          />
-        </div>
-        <div *ngIf="!taskForm.valid && taskForm.get('title').touched">
-          <div
-            *ngIf="taskForm.get('title').errors?.['required']"
-            class="warningText"
-          >
-            Please Enter a title.
+          <div>
+            <label for="title">Title</label>
+            <input
+              formControlName="title"
+              type="text"
+              class="form-control"
+              id="title"
+              name="title"
+              [readOnly]="view"
+            />
           </div>
-        </div>
-        <div class="col-sm-2 form-group">
-          <label for="dueDate">Due Date</label>
-          <input
-            formControlName="dueDate"
-            type="text"
-            class="form-control"
-            id="dueDate"
-            name="dueDate"
-            [readOnly]="view"
-          />
-        </div>
-        <div *ngIf="!taskForm.valid && taskForm.get('dueDate').touched">
-          <div
-            *ngIf="taskForm.get('dueDate').errors?.['required']"
-            class="warningText"
-          >
-            Please Enter a Due Date
-          </div>
-        </div>
-        <div class="col-sm-2 form-group">
-          <!-- <label for="priority">Priority</label>
-          <select name="priority" id="priority">
-            <option value="High">High</option>
-            <option value="Medium">Medium</option>
-            <option value="Low">Low</option>
-          </select> -->
-          <input
-            formControlName="priority"
-            type="text"
-            class="form-control"
-            id="priority"
-            name="priority"
-            [readOnly]="view"
-          />
-          <div *ngIf="!taskForm.valid && taskForm.get('priority').touched">
-            <div
-              *ngIf="taskForm.get('priority').errors?.['required']"
+          <div *ngIf="!taskForm.valid && taskForm.get('title').touched">
+            <span
+              *ngIf="taskForm.get('title').errors?.['required']"
               class="warningText"
             >
-              Please Enter a Priority
+              Please Enter a title.
+            </span>
+          </div>
+        </div>
+        <div>
+          <div class="col-sm-2 form-group">
+            <label for="dueDate">Due Date</label>
+            <input
+              formControlName="dueDate"
+              type="text"
+              class="form-control"
+              id="dueDate"
+              name="dueDate"
+              [readOnly]="view"
+            />
+          </div>
+          <div *ngIf="!taskForm.valid && taskForm.get('dueDate').touched">
+            <span
+              *ngIf="taskForm.get('dueDate').errors?.['required']"
+              class="warningText"
+            >
+              Please Enter a Due Date
+            </span>
+          </div>
+        </div>
+        <div>
+          <div class="col-sm-2 form-group">
+            <label for="priority">Priority</label>
+            <select
+              name="priority"
+              id="priority"
+              class="form-control"
+              formControlName="priority"
+            >
+              <option value="High">High</option>
+              <option value="Medium">Medium</option>
+              <option value="Low">Low</option>
+            </select>
+            <!-- <input
+              formControlName="priority"
+              type="text"
+              class="form-control"
+              id="priority"
+              name="priority"
+              [readOnly]="view"
+            /> -->
+            <div *ngIf="!taskForm.valid && taskForm.get('priority').touched">
+              <span
+                *ngIf="taskForm.get('priority').errors?.['required']"
+                class="warningText"
+              >
+                Please Enter a Priority
+              </span>
             </div>
           </div>
         </div>
-        <div class="col-sm-2 form-group">
-          <label for="status">Status</label>
-          <input
-            formControlName="status"
-            type="checkbox"
-            class="form-check-input"
-            id="status"
-            name="status"
-            [readOnly]="view"
-          />
+        <div>
+          <div class="col-sm-2 form-group">
+            <label for="status">Status</label>
+            <br />
+            <input
+              formControlName="status"
+              type="checkbox"
+              class="form-check-input"
+              id="status"
+              name="status"
+              [readOnly]="view"
+            />
+          </div>
         </div>
-
-        <div class="textarea col-sm-2 form-group">
-          <label for="description">Description</label>
-          <input
-            formControlName="description"
-            type="text"
-            class="form-control"
-            id="description"
-            name="description"
-            [readOnly]="view"
-          />
-          <div *ngIf="!taskForm.valid && taskForm.get('description').touched">
-            <div
-              *ngIf="taskForm.get('description').errors?.['required']"
-              class="warningText"
-            >
-              Please Enter a Description
-            </div>
-            <div
-              *ngIf="taskForm.get('description').errors?.['minlength']"
-              class="warningText"
-            >
-              Minimum Length of Three
+        <div>
+          <div class="textarea col-sm-2 form-group">
+            <label for="description">Description</label>
+            <textarea
+              formControlName="description"
+              type="text"
+              rows="5"
+              cols="100"
+              class="form-control"
+              id="description"
+              name="description"
+              [readOnly]="view"
+            ></textarea>
+            <div *ngIf="!taskForm.valid && taskForm.get('description').touched">
+              <span
+                *ngIf="taskForm.get('description').errors?.['required']"
+                class="warningText"
+              >
+                Please Enter a Description
+              </span>
+              <span
+                *ngIf="taskForm.get('description').errors?.['minlength']"
+                class="warningText"
+              >
+                Minimum Length of Three
+              </span>
             </div>
           </div>
         </div>
