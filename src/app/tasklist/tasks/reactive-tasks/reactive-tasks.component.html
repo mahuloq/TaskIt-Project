@@ -26,15 +26,24 @@
         <div>
           <div class="col-sm-2 form-group">
             <label for="dueDate">Due Date</label>
-            <input
+            <!-- <input
               formControlName="dueDate"
               type="text"
               class="form-control"
               id="dueDate"
               name="dueDate"
               [readOnly]="view"
+            /> -->
+            <input
+              formControlName="dueDate"
+              type="date"
+              name="dueDate"
+              id="dueDate"
+              [readOnly]="view"
+              class="form-control"
             />
           </div>
+
           <div *ngIf="!taskForm.valid && taskForm.get('dueDate').touched">
             <span
               *ngIf="taskForm.get('dueDate').errors?.['required']"
@@ -53,18 +62,10 @@
               class="form-control"
               formControlName="priority"
             >
-              <option value="High">High</option>
+              <option value="High" selected="true">High</option>
               <option value="Medium">Medium</option>
               <option value="Low">Low</option>
             </select>
-            <!-- <input
-              formControlName="priority"
-              type="text"
-              class="form-control"
-              id="priority"
-              name="priority"
-              [readOnly]="view"
-            /> -->
             <div *ngIf="!taskForm.valid && taskForm.get('priority').touched">
               <span
                 *ngIf="taskForm.get('priority').errors?.['required']"
@@ -129,12 +130,11 @@
           >
             {{ taskEdit ? "Update" : "Add" }}
           </button>
+          <button (click)="onClose()" class="btn btn-danger" type="button">
+            Close
+          </button>
         </div>
       </div>
     </form>
-    <!-- </div>
-  <div *ngIf="onFormSubmit">
-    <span>{{ this.taskForm.value.title }}</span>
-  </div> -->
   </div>
 </div>

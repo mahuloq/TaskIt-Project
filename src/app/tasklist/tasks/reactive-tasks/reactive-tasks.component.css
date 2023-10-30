@@ -5,3 +5,7 @@ input.ng-touched.ng-invalid {
 .warningText {
   color: rgba(236, 9, 9, 0.986);
 }
+
+.btn {
+  margin-right: 5px;
+}

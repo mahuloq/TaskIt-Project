@@ -10,11 +10,17 @@ export class TaskService {
 
   taskState = '';
   storedIndex;
+  // objectDate: any = Date();
+  // day = this.objectDate.getDate();
+  // month = this.objectDate.getMonth();
+  // year = this.objectDate.getYear();
+
+  // format1 = `${this.month}/${this.day}/${this.year}`;
 
   allTasks: Task[] = [
-    new Task('Mow Lawn', '11/17/23', 'High', false, 'test'),
-    new Task('Clean Room', '11/17/23', 'Medium', false, 'test 2'),
-    new Task('Become Genius', '11/17/23', 'Low', false, 'test 3'),
+    new Task('Mow Lawn', Date(), 'High', false, 'test'),
+    new Task('Clean Room', Date(), 'Medium', false, 'test 2'),
+    new Task('Become Genius', Date(), 'Low', false, 'test 3'),
   ];
 
   getTasks() {
@@ -42,6 +48,11 @@ export class TaskService {
   }
   taskStateOpen() {
     this.taskState = 'open';
+    this.taskStateChange.emit(this.taskState);
+  }
+
+  taskStateClose() {
+    this.taskState = 'closed';
     this.taskStateChange.emit(this.taskState);
   }
 

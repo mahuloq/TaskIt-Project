@@ -22,7 +22,7 @@
           <div
             [ngClass]="task.status ? 'strikethrough insideTask' : ' insideTask'"
           >
-            {{ task.dueDate }}
+            {{ task.dueDate | date }}
           </div>
           <div
             [ngClass]="task.status ? 'strikethrough insideTask' : ' insideTask'"

@@ -19,7 +19,7 @@ export class ReactiveTasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.taskForm = new FormGroup({
-      title: new FormControl(null, [
+      title: new FormControl('Enter Title Here', [
         Validators.required,
         this.noWhitespaceValidator,
       ]),
@@ -27,7 +27,7 @@ export class ReactiveTasksComponent implements OnInit {
         Validators.required,
         this.noWhitespaceValidator,
       ]),
-      priority: new FormControl(null),
+      priority: new FormControl('High'),
       status: new FormControl(null),
       description: new FormControl(null, [
         Validators.required,
@@ -42,7 +42,7 @@ export class ReactiveTasksComponent implements OnInit {
       ();
   }
   onSubmit() {
-    this.onFormSubmit = true;
+    var newDate = new Date();
 
     const newTask = { ...this.taskForm.value };
 
@@ -74,7 +74,11 @@ export class ReactiveTasksComponent implements OnInit {
     } else {
       this.taskService.saveTask(newTask);
     }
-    this.taskForm.reset();
+
+    this.taskForm.reset({
+      title: 'Enter Title Here',
+      priority: 'High',
+    });
   }
 
   onEdit(task: Task, index: number, view) {
@@ -92,6 +96,14 @@ export class ReactiveTasksComponent implements OnInit {
       description: task.description,
     });
   }
+  onClose() {
+    this.taskService.taskStateClose();
+    this.taskForm.reset({
+      title: 'Enter Title Here',
+      priority: 'High',
+    });
+  }
+
   public noWhitespaceValidator(control: FormControl) {
     return (control.value || '').trim().length ? null : { whitespace: true };
   }
