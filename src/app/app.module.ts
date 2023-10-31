@@ -10,6 +10,7 @@ import { TasksEditComponent } from './tasklist/tasks/tasks-edit/tasks-edit.compo
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveTasksComponent } from './tasklist/tasks/reactive-tasks/reactive-tasks.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
+import { KanbanComponent } from './kanban/kanban.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LandingPageComponent } from './landing-page/landing-page.component';
     TasksEditComponent,
     ReactiveTasksComponent,
     LandingPageComponent,
+    KanbanComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
