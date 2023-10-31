@@ -66,3 +66,7 @@ button {
 .buttoncontainer {
   margin-bottom: auto;
 }
+
+.btn {
+  margin-bottom: 5px;
+}

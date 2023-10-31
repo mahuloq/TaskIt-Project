@@ -9,6 +9,7 @@ import { TasksComponent } from './tasklist/tasks/tasks.component';
 import { TasksEditComponent } from './tasklist/tasks/tasks-edit/tasks-edit.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveTasksComponent } from './tasklist/tasks/reactive-tasks/reactive-tasks.component';
+import { LandingPageComponent } from './landing-page/landing-page.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { ReactiveTasksComponent } from './tasklist/tasks/reactive-tasks/reactive
     TasksComponent,
     TasksEditComponent,
     ReactiveTasksComponent,
+    LandingPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
