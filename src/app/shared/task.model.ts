@@ -3,7 +3,7 @@ export class Task {
     public title: string,
     public dueDate: any,
     public priority: any,
-    public status: boolean,
+    public status: string,
     public description: string
   ) {}
 }

@@ -10,3 +10,14 @@ input.ng-touched.ng-invalid {
   margin-right: 5px;
   margin-top: 5px;
 }
+
+.overlay {
+  border: solid black 1px;
+  padding: 10px;
+  background-color: moccasin;
+  z-index: 3;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

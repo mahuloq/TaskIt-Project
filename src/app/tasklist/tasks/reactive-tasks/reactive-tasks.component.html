@@ -1,4 +1,6 @@
-<div class="row">
+<div class="darkScreen"></div>
+
+<div class="row overlay">
   <div class="col-xs-12">
     <form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
       <div class="row">
@@ -26,14 +28,7 @@
         <div>
           <div class="col-sm-2 form-group">
             <label for="dueDate">Due Date</label>
-            <!-- <input
-              formControlName="dueDate"
-              type="text"
-              class="form-control"
-              id="dueDate"
-              name="dueDate"
-              [readOnly]="view"
-            /> -->
+
             <input
               formControlName="dueDate"
               type="date"
@@ -80,14 +75,25 @@
           <div class="col-sm-2 form-group">
             <label for="status">Status</label>
             <br />
-            <input
+            <select
+              name="status"
+              id="status"
+              class="form-control"
+              formControlName="status"
+            >
+              <option value="To Do" selected="true">To Do</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Complete">Complete</option>
+            </select>
+
+            <!-- <input
               formControlName="status"
               type="checkbox"
               class="form-check-input"
               id="status"
               name="status"
               [readOnly]="view"
-            />
+            /> -->
           </div>
         </div>
         <div>

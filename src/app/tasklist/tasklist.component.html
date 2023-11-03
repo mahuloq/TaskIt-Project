@@ -1,5 +1,10 @@
 <div class="main">
-  <div class="title">Task List</div>
+  <div class="title">
+    Task List <span *ngif="deleted">You have deleted a task.</span>
+    <span *ngif="added">You have added a new task. </span>
+    <span *ngif="saved">You have edited a task.</span>
+  </div>
+
   <div class="taskbar">
     <div class="filterbox">
       <label for="filter"><span class="filtertext">Filters:</span></label>
@@ -8,9 +13,6 @@
         <option value="open">Open</option>
         <option value="closed">Closed</option>
       </select>
-      <!-- <select name="date" id="">
-        <option value="calender" disabled="true" selected="true">Date</option>
-      </select> -->
       <div>
         <label for="">Due Date: </label>
         <input type="date" name="" id="" />

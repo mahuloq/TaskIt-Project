@@ -15,28 +15,40 @@
         *ngFor="let task of tasks; let i = index"
         ><div class="taskHolder">
           <div
-            [ngClass]="task.status ? 'strikethrough insideTask' : ' insideTask'"
+            [ngClass]="
+              task.status === 'Complete'
+                ? 'strikethrough insideTask'
+                : ' insideTask'
+            "
           >
             {{ task.title }}
           </div>
           <div
-            [ngClass]="task.status ? 'strikethrough insideTask' : ' insideTask'"
+            [ngClass]="
+              task.status === 'Complete'
+                ? 'strikethrough insideTask'
+                : ' insideTask'
+            "
           >
             {{ task.dueDate | date }}
           </div>
           <div
-            [ngClass]="task.status ? 'strikethrough insideTask' : ' insideTask'"
+            [ngClass]="
+              task.status === 'Complete'
+                ? 'strikethrough insideTask'
+                : ' insideTask'
+            "
           >
             {{ task.priority }}
           </div>
           <div
             [ngClass]="
-              task.status
+              task.status === 'Complete'
                 ? 'highlight-closed insideTask'
                 : 'highlight-open insideTask'
             "
           >
-            {{ task.status ? "Closed" : "Open" }}
+            {{ task.status }}
           </div>
           <ul class="insideTask">
             <li (click)="openEdit(form, i, true)">View</li>
