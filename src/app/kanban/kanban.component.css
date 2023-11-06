@@ -15,7 +15,6 @@ body,
 .inProgress,
 .done {
   width: 33%;
-
   text-align: center;
 }
 
@@ -28,6 +27,7 @@ body,
 .inProgressC,
 .doneC {
   margin-top: 25px;
+
   width: 33%;
   height: 70vh;
   text-align: center;
@@ -68,8 +68,9 @@ ul {
   .doneC {
     margin-top: 25px;
     height: 26vh;
-    width: 66vw;
+    width: 100%;
     text-align: center;
+    border: solid red 1px;
   }
 
   .headers {
@@ -80,5 +81,11 @@ ul {
   .inProgressTitle,
   .doneTitle {
     display: block;
+    margin-bottom: 10px;
+    text-decoration: underline;
+  }
+
+  .looks {
+    display: flex;
   }
 }

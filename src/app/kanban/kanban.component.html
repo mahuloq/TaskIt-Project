@@ -14,10 +14,7 @@
       <div class="todoC">
         <label class="todoTitle" for="">To Do</label>
         <ul class="list-group">
-          <a
-            class="list-group-item"
-            style="cursor: pointer"
-            *ngFor="let task of tasks; let i = index"
+          <a style="cursor: pointer" *ngFor="let task of tasks; let i = index"
             ><div class="taskHolder" *ngIf="task.status === 'To Do'">
               <div
                 [ngClass]="
@@ -67,10 +64,7 @@
       <div class="inProgressC">
         <label class="inProgressTitle" for="">In Progress</label>
         <ul class="list-group">
-          <a
-            class="list-group-item"
-            style="cursor: pointer"
-            *ngFor="let task of tasks; let i = index"
+          <a style="cursor: pointer" *ngFor="let task of tasks; let i = index"
             ><div class="taskHolder" *ngIf="task.status === 'In Progress'">
               <div
                 [ngClass]="
@@ -120,10 +114,7 @@
       <div class="doneC">
         <label class="doneTitle" for="">Done</label>
         <ul class="list-group">
-          <a
-            class="list-group-item"
-            style="cursor: pointer"
-            *ngFor="let task of tasks; let i = index"
+          <a style="cursor: pointer" *ngFor="let task of tasks; let i = index"
             ><div class="taskHolder" *ngIf="task.status === 'Complete'">
               <div
                 [ngClass]="
