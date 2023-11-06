@@ -1,90 +1,174 @@
 <body>
+  <div class="h1 title">Kanban Board</div>
+  <app-reactive-tasks
+    [hidden]="taskState === 'closed'"
+    #form
+  ></app-reactive-tasks>
   <div class="container">
-    <div class="kanban-heading">
-      <strong class="kanban-heading-text">Kanban Board</strong>
+    <div class="headers">
+      <div class="todo">To Do</div>
+      <div class="inProgress">In Progress</div>
+      <div class="done">Done</div>
     </div>
-    <div class="kanban-board">
-      <div
-        class="kanban-block"
-        id="todo"
-        ondrop="drop(event)"
-        ondragover="allowDrop(event)"
-      >
-        <strong>To Do</strong>
-        <div class="task-button-block">
-          <button id="task-button" onclick="createTask()">
-            Create new task
-          </button>
-        </div>
-        <div class="task" id="task1" draggable="true" ondragstart="drag(event)">
-          <span>Task 1</span>
-        </div>
-        <div class="task" id="task2" draggable="true" ondragstart="drag(event)">
-          <span>Task 2</span>
-        </div>
-        <div class="task" id="task3" draggable="true" ondragstart="drag(event)">
-          <span>Task 3</span>
-        </div>
-        <div class="task" id="task4" draggable="true" ondragstart="drag(event)">
-          <span>Task 4</span>
-        </div>
-        <div class="task" id="task5" draggable="true" ondragstart="drag(event)">
-          <span>Task 5</span>
-        </div>
-        <div class="task" id="task6" draggable="true" ondragstart="drag(event)">
-          <span>Task 6</span>
-        </div>
+    <div class="kanban-containers">
+      <div class="todoC">
+        <label class="todoTitle" for="">To Do</label>
+        <ul class="list-group">
+          <a
+            class="list-group-item"
+            style="cursor: pointer"
+            *ngFor="let task of tasks; let i = index"
+            ><div class="taskHolder" *ngIf="task.status === 'To Do'">
+              <div
+                [ngClass]="
+                  task.status === 'Complete'
+                    ? 'strikethrough insideTask'
+                    : ' insideTask'
+                "
+              >
+                {{ task.title }}
+              </div>
+              <div
+                [ngClass]="
+                  task.status === 'Complete'
+                    ? 'strikethrough insideTask'
+                    : ' insideTask'
+                "
+              >
+                {{ task.dueDate | date }}
+              </div>
+              <div
+                [ngClass]="
+                  task.status === 'Complete'
+                    ? 'strikethrough insideTask'
+                    : ' insideTask'
+                "
+              >
+                {{ task.priority }}
+              </div>
+              <div
+                [ngClass]="
+                  task.status === 'Complete'
+                    ? 'highlight-closed insideTask'
+                    : 'highlight-open insideTask'
+                "
+              >
+                {{ task.status }}
+              </div>
+              <ul class="insideTask">
+                <li (click)="openEdit(form, i, true)">View</li>
+                <li (click)="openEdit(form, i, false)">Edit</li>
+                <li (click)="deleteTask(i)">Delete</li>
+              </ul>
+            </div>
+          </a>
+        </ul>
       </div>
-      <div
-        class="kanban-block"
-        id="inprogress"
-        ondrop="drop(event)"
-        ondragover="allowDrop(event)"
-      >
-        <strong>In Progress</strong>
+      <div class="inProgressC">
+        <label class="inProgressTitle" for="">In Progress</label>
+        <ul class="list-group">
+          <a
+            class="list-group-item"
+            style="cursor: pointer"
+            *ngFor="let task of tasks; let i = index"
+            ><div class="taskHolder" *ngIf="task.status === 'In Progress'">
+              <div
+                [ngClass]="
+                  task.status === 'Complete'
+                    ? 'strikethrough insideTask'
+                    : ' insideTask'
+                "
+              >
+                {{ task.title }}
+              </div>
+              <div
+                [ngClass]="
+                  task.status === 'Complete'
+                    ? 'strikethrough insideTask'
+                    : ' insideTask'
+                "
+              >
+                {{ task.dueDate | date }}
+              </div>
+              <div
+                [ngClass]="
+                  task.status === 'Complete'
+                    ? 'strikethrough insideTask'
+                    : ' insideTask'
+                "
+              >
+                {{ task.priority }}
+              </div>
+              <div
+                [ngClass]="
+                  task.status === 'Complete'
+                    ? 'highlight-closed insideTask'
+                    : 'highlight-open insideTask'
+                "
+              >
+                {{ task.status }}
+              </div>
+              <ul class="insideTask">
+                <li (click)="openEdit(form, i, true)">View</li>
+                <li (click)="openEdit(form, i, false)">Edit</li>
+                <li (click)="deleteTask(i)">Delete</li>
+              </ul>
+            </div>
+          </a>
+        </ul>
       </div>
-      <div
-        class="kanban-block"
-        id="done"
-        ondrop="drop(event)"
-        ondragover="allowDrop(event)"
-      >
-        <strong>Done</strong>
-      </div>
-      <div class="create-new-task-block" id="create-new-task-block">
-        <strong>New Task</strong>
-        <span class="form-row">
-          <label class="form-row-label" for="task-name">Task</label>
-          <input
-            class="form-row-input"
-            type="text"
-            name="task-name"
-            id="task-name"
-          />
-        </span>
-        <span class="form-row">
-          <label class="form-row-label" for="task-name">Description</label>
-          <textarea
-            class="form-row-input"
-            name="task-description"
-            id="task-description"
-            cols="70"
-            rows="10"
-          ></textarea>
-        </span>
-        <span class="form-row">
-          <label class="form-row-label" for="task-name">Status</label>
-          <select class="form-row-input" name="task-status" id="task-status">
-            <option value="todo">To Do</option>
-            <option value="inprogress">In Progress</option>
-            <option value="done">Done</option>
-          </select>
-        </span>
-        <span class="form-row-buttons">
-          <button id="edit-button" onclick="editTask()">Edit</button>
-          <button id="save-button" onclick="saveTask()">Save</button>
-          <button id="cancel-button" onclick="createTask()">Cancel</button>
-        </span>
+      <div class="doneC">
+        <label class="doneTitle" for="">Done</label>
+        <ul class="list-group">
+          <a
+            class="list-group-item"
+            style="cursor: pointer"
+            *ngFor="let task of tasks; let i = index"
+            ><div class="taskHolder" *ngIf="task.status === 'Complete'">
+              <div
+                [ngClass]="
+                  task.status === 'Complete'
+                    ? 'strikethrough insideTask'
+                    : ' insideTask'
+                "
+              >
+                {{ task.title }}
+              </div>
+              <div
+                [ngClass]="
+                  task.status === 'Complete'
+                    ? 'strikethrough insideTask'
+                    : ' insideTask'
+                "
+              >
+                {{ task.dueDate | date }}
+              </div>
+              <div
+                [ngClass]="
+                  task.status === 'Complete'
+                    ? 'strikethrough insideTask'
+                    : ' insideTask'
+                "
+              >
+                {{ task.priority }}
+              </div>
+              <div
+                [ngClass]="
+                  task.status === 'Complete'
+                    ? 'highlight-closed insideTask'
+                    : 'highlight-open insideTask'
+                "
+              >
+                {{ task.status }}
+              </div>
+              <ul class="insideTask">
+                <li (click)="openEdit(form, i, true)">View</li>
+                <li (click)="openEdit(form, i, false)">Edit</li>
+                <li (click)="deleteTask(i)">Delete</li>
+              </ul>
+            </div>
+          </a>
+        </ul>
       </div>
     </div>
   </div>

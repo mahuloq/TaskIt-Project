@@ -27,8 +27,8 @@ export class ReactiveTasksComponent implements OnInit {
         Validators.required,
         this.noWhitespaceValidator,
       ]),
-      priority: new FormControl('High'),
-      status: new FormControl('ToDo'),
+      priority: new FormControl('Low'),
+      status: new FormControl('To Do'),
       description: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),

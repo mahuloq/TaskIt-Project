@@ -1,73 +1,42 @@
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Task } from 'src/app/shared/task.model';
+import { TaskService } from 'src/app/shared/taskService.service';
 
 @Component({
   selector: 'app-kanban',
   templateUrl: './kanban.component.html',
   styleUrls: ['./kanban.component.css'],
 })
-export class KanbanComponent {
-  drag(ev) {
-    ev.dataTransfer.setData('text', ev.target.id);
+export class KanbanComponent implements OnInit {
+  taskState = 'closed';
+
+  tasks = <Task[]>[];
+
+  constructor(private taskService: TaskService) {}
+
+  ngOnInit(): void {
+    this.tasks = this.taskService.getTasks();
+    this.taskService.taskListChanged.subscribe((task) => (this.tasks = task));
+    this.taskService.taskStateChange.subscribe(
+      (taskStatus) => (this.taskState = taskStatus)
+    );
   }
 
-  allowDrop(ev) {
-    ev.preventDefault();
+  viewTask() {
+    console.log('View Test');
   }
 
-  drop(ev) {
-    ev.preventDefault();
-    var data = ev.dataTransfer.getData('text');
-    ev.currentTarget.appendChild(document.getElementById(data));
+  openEdit(form, i, view: boolean) {
+    form.onEdit(this.tasks[i], i, view);
+    // this.taskService.taskStateEdit(i);
   }
 
-  createTask() {
-    console.log('test');
-    var x = document.getElementById('inprogress');
-    var y = document.getElementById('done');
-    var z = document.getElementById('create-new-task-block');
-    if (x.style.display === 'none') {
-      x.style.display = 'block';
-      y.style.display = 'block';
-      z.style.display = 'none';
+  deleteTask(i) {
+    if (!confirm('Are you sure you want to delete this?')) {
+      return;
     } else {
-      x.style.display = 'none';
-      y.style.display = 'none';
-      z.style.display = 'flex';
-    }
-  }
-
-  saveTask() {
-    // var saveButton = document.getElementById("save-button");
-    // var editButton = document.getElementById("edit-button");
-    // if (saveButton.style.display === "none") {
-    //     saveButton.style.display = "block";
-    //     editButton.style.display = "none";
-    // } else{
-    //     saveButton.style.display = "none";
-    //     editButton.style.display = "block";
-    // }
-
-    var todo = document.getElementById('todo');
-    var taskName = document.getElementById('task-name').ariaValueNow;
-    todo.innerHTML += `
-    <div class="task" id="${taskName
-      .toLowerCase()
-      .split(' ')
-      .join('')}" draggable="true" ondragstart="drag(event)">
-        <span>${taskName}</span>
-    </div>
-    `;
-  }
-
-  editTask() {
-    var saveButton = document.getElementById('save-button');
-    var editButton = document.getElementById('edit-button');
-    if (saveButton.style.display === 'none') {
-      saveButton.style.display = 'block';
-      editButton.style.display = 'none';
-    } else {
-      saveButton.style.display = 'none';
-      editButton.style.display = 'block';
+      console.log('Delete Test');
+      this.taskService.removeTask(i);
     }
   }
 }
