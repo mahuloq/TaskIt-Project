@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import { Task } from './task.model';
+import { Subject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class TaskService {
@@ -7,7 +8,9 @@ export class TaskService {
   taskListChanged = new EventEmitter<Task[]>();
   taskStateChange = new EventEmitter<string>();
   indexStateChange = new EventEmitter<number>();
+  notifStateChange = new Subject<string>();
 
+  notifstate = '';
   taskState = '';
   storedIndex;
   // objectDate: any = Date();
@@ -38,6 +41,8 @@ export class TaskService {
   removeTask(id: number) {
     this.allTasks.splice(id, 1);
     this.taskListChanged.emit(this.getTasks());
+    this.notifstate = 'deleted';
+    this.notifStateChange.next(this.notifstate);
   }
 
   saveTask(task: Task) {
@@ -45,6 +50,8 @@ export class TaskService {
     this.taskState = 'closed';
     this.taskStateChange.emit(this.taskState);
     this.taskListChanged.emit(this.getTasks());
+    this.notifstate = 'saved';
+    this.notifStateChange.next(this.notifstate);
   }
   taskStateOpen() {
     this.taskState = 'open';
@@ -61,5 +68,7 @@ export class TaskService {
     this.taskState = 'closed';
     this.taskStateChange.emit(this.taskState);
     this.taskListChanged.emit(this.getTasks());
+    this.notifstate = 'edited';
+    this.notifStateChange.next(this.notifstate);
   }
 }

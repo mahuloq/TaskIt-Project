@@ -9,6 +9,7 @@ body,
   justify-content: center;
   align-self: center;
   text-align: center;
+  padding-bottom: 10px;
 }
 
 .headers {
@@ -33,7 +34,7 @@ body,
 .todoC,
 .inProgressC,
 .doneC {
-  margin-top: 25px;
+  margin-top: 10px;
   border: solid black 1px;
   width: 33%;
   height: 70vh;

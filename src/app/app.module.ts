@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveTasksComponent } from './tasklist/tasks/reactive-tasks/reactive-tasks.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { KanbanComponent } from './kanban/kanban.component';
+import { NotificationComponent } from './notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { KanbanComponent } from './kanban/kanban.component';
     ReactiveTasksComponent,
     LandingPageComponent,
     KanbanComponent,
+    NotificationComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
   providers: [],
