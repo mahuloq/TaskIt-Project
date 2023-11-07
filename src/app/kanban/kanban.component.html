@@ -15,7 +15,7 @@
         <label class="todoTitle" for="">To Do</label>
         <ul class="list-group">
           <a style="cursor: pointer" *ngFor="let task of tasks; let i = index"
-            ><div class="taskHolder" *ngIf="task.status === 'To Do'">
+            ><div class="taskHolder temp" *ngIf="task.status === 'To Do'">
               <div
                 [ngClass]="
                   task.status === 'Complete'

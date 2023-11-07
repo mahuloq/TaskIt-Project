@@ -22,12 +22,14 @@ body,
   display: flex;
   justify-content: space-evenly;
 }
+.temp {
+}
 
 .todoC,
 .inProgressC,
 .doneC {
   margin-top: 25px;
-
+  border: solid black 1px;
   width: 33%;
   height: 70vh;
   text-align: center;
@@ -59,18 +61,17 @@ ul {
   .kanban-containers {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    align-content: flex-end;
   }
 
   .todoC,
   .inProgressC,
   .doneC {
+    font-size: 14px;
     margin-top: 25px;
     height: 26vh;
     width: 100%;
     text-align: center;
-    border: solid red 1px;
+    border: solid black 1px;
   }
 
   .headers {
@@ -81,7 +82,8 @@ ul {
   .inProgressTitle,
   .doneTitle {
     display: block;
-    margin-bottom: 10px;
+    border: solid red 1px;
+
     text-decoration: underline;
   }
 
