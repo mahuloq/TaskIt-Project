@@ -1,5 +1,8 @@
 <body>
   <div class="h1 title">Kanban Board</div>
+  <div class="newTask">
+    <button class="btn btn-primary" (click)="openTasks()">Add New Task</button>
+  </div>
   <app-reactive-tasks
     [hidden]="taskState === 'closed'"
     #form
@@ -17,6 +20,7 @@
           <a style="cursor: pointer" *ngFor="let task of tasks; let i = index"
             ><div class="taskHolder temp" *ngIf="task.status === 'To Do'">
               <div
+                class="test1"
                 [ngClass]="
                   task.status === 'Complete'
                     ? 'strikethrough insideTask'

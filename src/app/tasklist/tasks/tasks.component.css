@@ -25,3 +25,7 @@ li {
 .highlight-open {
   color: green;
 }
+@media screen and (max-width: 770px) {
+  .tasksss {
+  }
+}

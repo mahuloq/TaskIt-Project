@@ -39,4 +39,7 @@ export class KanbanComponent implements OnInit {
       this.taskService.removeTask(i);
     }
   }
+  openTasks() {
+    this.taskService.taskStateOpen();
+  }
 }
