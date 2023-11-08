@@ -29,6 +29,7 @@ body,
   justify-content: space-evenly;
 }
 .temp {
+  background-color: aliceblue;
 }
 
 .todoC,

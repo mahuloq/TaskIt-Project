@@ -78,6 +78,7 @@ export class ReactiveTasksComponent implements OnInit {
     this.taskForm.reset({
       title: 'Enter Title Here',
       priority: 'High',
+      status: 'To Do',
     });
   }
 
@@ -85,8 +86,6 @@ export class ReactiveTasksComponent implements OnInit {
     this.view = view;
     this.taskService.taskStateOpen();
     this.taskEdit = true;
-    console.log(index);
-    console.log(task);
     this.taskIndex = index;
     this.taskForm.patchValue({
       title: task.title,
@@ -101,6 +100,7 @@ export class ReactiveTasksComponent implements OnInit {
     this.taskForm.reset({
       title: 'Enter Title Here',
       priority: 'High',
+      status: 'To Do',
     });
   }
 
