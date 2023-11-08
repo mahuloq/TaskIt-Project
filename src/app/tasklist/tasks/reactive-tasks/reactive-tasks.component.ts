@@ -18,15 +18,26 @@ export class ReactiveTasksComponent implements OnInit {
   constructor(private taskService: TaskService) {}
 
   ngOnInit(): void {
+    let testDate = new Date();
+
+    let year = testDate.getFullYear();
+    let month: string | number = testDate.getMonth();
+    let day: string | number = testDate.getDate();
+
+    month = month.toString().length > 1 ? month : '0' + month;
+    day = day.toString().length > 1 ? day : '0' + day;
+
+    let newDate = `${year}-${month}-${day}`;
+
     this.taskForm = new FormGroup({
       title: new FormControl('Enter Title Here', [
         Validators.required,
         this.noWhitespaceValidator,
       ]),
-      dueDate: new FormControl(null, [Validators.required]),
+      dueDate: new FormControl(newDate, [Validators.required]),
       priority: new FormControl('Low', Validators.required),
       status: new FormControl('To Do', Validators.required),
-      description: new FormControl(null, [
+      description: new FormControl('test', [
         Validators.required,
         Validators.minLength(3),
         this.noWhitespaceValidator,
