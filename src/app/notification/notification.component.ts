@@ -24,7 +24,6 @@ export class NotificationComponent implements OnInit {
       this.alert = notif;
       let task = this.tasks;
 
-      console.log(task);
       if (this.alert === 'deleted') {
         this.alertMessage = 'You have deleted a task';
         setTimeout(() => {
@@ -43,10 +42,9 @@ export class NotificationComponent implements OnInit {
         this.alert === 'edited' &&
         JSON.stringify(taskCheck) == JSON.stringify(task)
       ) {
-        this.alertMessage = 'No Information Changed';
-        setTimeout(() => {
-          this.alert = '';
-        }, 2000);
+        this.alert = '';
+        // this.alertMessage = 'No Information Changed';
+        setTimeout(() => {}, 2000);
       } else {
         this.alertMessage = 'You have created a new task.';
         setTimeout(() => {

@@ -23,10 +23,7 @@ export class ReactiveTasksComponent implements OnInit {
         Validators.required,
         this.noWhitespaceValidator,
       ]),
-      dueDate: new FormControl(null, [
-        Validators.required,
-        this.noWhitespaceValidator,
-      ]),
+      dueDate: new FormControl(null, [Validators.required]),
       priority: new FormControl('Low', Validators.required),
       status: new FormControl('To Do', Validators.required),
       description: new FormControl(null, [
@@ -36,36 +33,12 @@ export class ReactiveTasksComponent implements OnInit {
       ]),
     });
 
-    this.taskService.indexStateChange
-      .subscribe
-      // (storedIndex) =>();
-      ();
+    this.taskService.indexStateChange.subscribe();
   }
   onSubmit() {
     var newDate = new Date();
 
     const newTask = { ...this.taskForm.value };
-
-    // const newTask = new Task(
-    //   this.taskForm.value['title'],
-    //   this.taskForm.value['dueDate'],
-    //   this.taskForm.value['priority'],
-    //   this.taskForm.value['status'],
-    //   this.taskForm.value['description']
-    // );
-
-    // const tskTitle = this.taskForm.value.title;
-    // const tskdueDate = this.taskForm.value.dueDate;
-    // const tskPriority = this.taskForm.value.priority;
-    // const tskStatus = this.taskForm.value.status;
-    // const tskDescript = this.taskForm.value.description;
-    // const newTask = new Task(
-    //   tskTitle,
-    //   tskdueDate,
-    //   tskPriority,
-    //   tskStatus,
-    //   tskDescript
-    // );
 
     if (this.taskEdit) {
       this.taskService.taskStateEdit(newTask, this.taskIndex);
