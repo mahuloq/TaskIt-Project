@@ -50,6 +50,7 @@ export class TaskService {
     this.taskListChanged.emit(this.getTasks());
     this.notifstate = 'deleted';
     this.notifStateChange.next(this.notifstate);
+    this;
   }
 
   saveTask(task: Task) {

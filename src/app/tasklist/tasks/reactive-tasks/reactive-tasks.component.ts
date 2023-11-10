@@ -1,5 +1,6 @@
 import { Component, OnChanges, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Task } from 'src/app/shared/task.model';
 import { TaskService } from 'src/app/shared/taskService.service';
 
@@ -15,7 +16,10 @@ export class ReactiveTasksComponent implements OnInit {
   taskIndex;
   view = false;
 
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private dataService: DataStorageService
+  ) {}
   testDate = new Date();
 
   year = this.testDate.getFullYear();
@@ -65,6 +69,8 @@ export class ReactiveTasksComponent implements OnInit {
       status: 'To Do',
       dueDate: this.newDate,
     });
+
+    this.dataService.saveTasks();
   }
 
   onEdit(task: Task, index: number, view) {
@@ -79,6 +85,7 @@ export class ReactiveTasksComponent implements OnInit {
       status: task.status,
       description: task.description,
     });
+    this.dataService.saveTasks();
   }
   onClose() {
     this.taskService.taskStateClose();

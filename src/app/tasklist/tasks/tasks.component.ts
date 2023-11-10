@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Task } from 'src/app/shared/task.model';
 import { TaskService } from 'src/app/shared/taskService.service';
 
@@ -13,7 +14,10 @@ export class TasksComponent implements OnInit {
 
   tasks = <Task[]>[];
 
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private dataService: DataStorageService
+  ) {}
 
   ngOnInit(): void {
     this.tasks = this.taskService.getTasks();
@@ -38,6 +42,7 @@ export class TasksComponent implements OnInit {
     } else {
       console.log('Delete Test');
       this.taskService.removeTask(i);
+      this.dataService.saveTasks();
     }
   }
 }
