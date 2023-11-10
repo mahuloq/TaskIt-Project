@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { TasklistComponent } from './tasklist/tasklist.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LandingPageComponent } from './auth/auth.component';
 import { KanbanComponent } from './kanban/kanban.component';
 
 const routes: Routes = [

@@ -8,10 +8,11 @@ import { TasklistComponent } from './tasklist/tasklist.component';
 import { TasksComponent } from './tasklist/tasks/tasks.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ReactiveTasksComponent } from './tasklist/tasks/reactive-tasks/reactive-tasks.component';
-import { LandingPageComponent } from './landing-page/landing-page.component';
+import { LandingPageComponent } from './auth/auth.component';
 import { KanbanComponent } from './kanban/kanban.component';
 import { NotificationComponent } from './notification/notification.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import { HttpClientModule } from '@angular/common/http';
     LandingPageComponent,
     KanbanComponent,
     NotificationComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,
