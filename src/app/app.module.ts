@@ -11,6 +11,7 @@ import { ReactiveTasksComponent } from './tasklist/tasks/reactive-tasks/reactive
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { KanbanComponent } from './kanban/kanban.component';
 import { NotificationComponent } from './notification/notification.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,13 @@ import { NotificationComponent } from './notification/notification.component';
     KanbanComponent,
     NotificationComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

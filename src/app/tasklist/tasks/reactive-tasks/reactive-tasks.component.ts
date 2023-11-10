@@ -16,28 +16,28 @@ export class ReactiveTasksComponent implements OnInit {
   view = false;
 
   constructor(private taskService: TaskService) {}
+  testDate = new Date();
+
+  year = this.testDate.getFullYear();
+  month: string | number = this.testDate.getMonth() + 1;
+  day: string | number = this.testDate.getDate();
+
+  monthO = this.month.toString().length > 1 ? this.month : '0' + this.month;
+
+  dayO = this.day.toString().length > 1 ? this.day : '0' + this.day;
+
+  newDate = `${this.year}-${this.monthO}-${this.dayO}`;
 
   ngOnInit(): void {
-    let testDate = new Date();
-
-    let year = testDate.getFullYear();
-    let month: string | number = testDate.getMonth();
-    let day: string | number = testDate.getDate();
-
-    month = month.toString().length > 1 ? month : '0' + month;
-    day = day.toString().length > 1 ? day : '0' + day;
-
-    let newDate = `${year}-${month}-${day}`;
-
     this.taskForm = new FormGroup({
       title: new FormControl('Enter Title Here', [
         Validators.required,
         this.noWhitespaceValidator,
       ]),
-      dueDate: new FormControl(newDate, [Validators.required]),
+      dueDate: new FormControl(this.newDate, [Validators.required]),
       priority: new FormControl('Low', Validators.required),
       status: new FormControl('To Do', Validators.required),
-      description: new FormControl('test', [
+      description: new FormControl(null, [
         Validators.required,
         Validators.minLength(3),
         this.noWhitespaceValidator,
@@ -63,6 +63,7 @@ export class ReactiveTasksComponent implements OnInit {
       title: 'Enter Title Here',
       priority: 'High',
       status: 'To Do',
+      dueDate: this.newDate,
     });
   }
 
@@ -85,6 +86,7 @@ export class ReactiveTasksComponent implements OnInit {
       title: 'Enter Title Here',
       priority: 'High',
       status: 'To Do',
+      dueDate: this.newDate,
     });
   }
 

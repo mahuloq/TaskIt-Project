@@ -20,14 +20,21 @@ export class TaskService {
 
   // format1 = `${this.month}/${this.day}/${this.year}`;
 
-  allTasks: Task[] = [
-    new Task('Mow Lawn', Date(), 'High', 'To Do', 'test'),
-    new Task('Clean Room', Date(), 'Medium', 'In Progress', 'test 2'),
-    new Task('Become Genius', Date(), 'Low', 'Complete', 'test 3'),
-  ];
+  allTasks: Task[] = [];
+
+  // allTasks: Task[] = [
+  //   new Task('Mow Lawn', Date(), 'High', 'To Do', 'test'),
+  //   new Task('Clean Room', Date(), 'Medium', 'In Progress', 'test 2'),
+  //   new Task('Become Genius', Date(), 'Low', 'Complete', 'test 3'),
+  // ];
 
   getTasks() {
     return [...this.allTasks];
+  }
+
+  setTasks(tasks: Task[]) {
+    this.allTasks = tasks;
+    this.taskListChanged.emit(this.allTasks);
   }
 
   getTask(index: number) {
