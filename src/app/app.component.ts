@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskService } from './shared/taskService.service';
+import { DataStorageService } from './shared/data-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,15 @@ export class AppComponent implements OnInit {
   title = 'TaskIt-Project';
   taskState;
 
-  constructor(private taskService: TaskService) {}
+  constructor(
+    private taskService: TaskService,
+    private dataService: DataStorageService
+  ) {}
 
   ngOnInit(): void {
     this.taskService.taskStateChange.subscribe(
       (taskStatus) => (this.taskState = taskStatus)
     );
+    this.dataService.getTasks();
   }
 }
