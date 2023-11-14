@@ -51,7 +51,7 @@ export class ReactiveTasksComponent implements OnInit {
     this.taskService.indexStateChange.subscribe();
   }
   onSubmit() {
-    var newDate = new Date();
+    // var newDate = new Date();
 
     const newTask = { ...this.taskForm.value };
 

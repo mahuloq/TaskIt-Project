@@ -70,3 +70,14 @@ button {
 .btn {
   margin-bottom: 5px;
 }
+
+.signIn,
+.logout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.box {
+}

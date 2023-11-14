@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>Welcome to the Task List Task Manager!</h1>
+  <ul class="list-container">
+    <li *ngIf="isAuthenticated">
+      Use this to help track things you need to get done.
+    </li>
+    <li *ngIf="isAuthenticated">
+      Click a view on the sidebar, to get started.
+    </li>
+    <li *ngIf="!isAuthenticated">Sign In To Get Started</li>
+  </ul>
+</div>

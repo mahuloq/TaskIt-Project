@@ -1,14 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
+
 import { TasklistComponent } from './tasklist/tasklist.component';
-import { LandingPageComponent } from './auth/auth.component';
+import { AuthComponent } from './auth/auth.component';
 import { KanbanComponent } from './kanban/kanban.component';
+import { HomeComponent } from './home/home.component';
+import { AuthGuard } from './auth/auth-guard';
 
 const routes: Routes = [
-  { path: '', component: LandingPageComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: 'auth', component: AuthComponent },
   { path: 'taskList', component: TasklistComponent },
-  { path: 'kanban', component: KanbanComponent },
+  { path: 'kanban', component: KanbanComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

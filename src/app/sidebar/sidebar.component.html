@@ -1,16 +1,34 @@
 <div class="box">
   <div class="titletext titlebox">TASK<span class="it">IT</span></div>
   <div class="buttoncontainer">
-    <div class="mainbtn btn btn-primary" routerLink="">Home</div>
-    <div class="mainbtn btn btn-success" routerLink="taskList">Task List</div>
-    <div class="mainbtn btn btn-danger" routerLink="kanban">Kanban</div>
+    <div class="mainbtn btn btn-primary" routerLink="home">Home</div>
+    <div
+      class="mainbtn btn btn-success"
+      routerLink="taskList"
+      *ngIf="isAuthenticated"
+    >
+      Task List
+    </div>
+    <div
+      class="mainbtn btn btn-danger"
+      routerLink="kanban"
+      *ngIf="isAuthenticated"
+    >
+      Kanban
+    </div>
   </div>
 
-  <div class="profile">
+  <div class="profile" *ngIf="isAuthenticated">
     <img class="profilePic" [src]="userImage" alt="" />
     <div class="profbox">
       <div class="name">{{ userName }}</div>
       <div class="email">{{ userEmail }}</div>
     </div>
+  </div>
+
+  <div class="logout" (click)="logout()" *ngIf="isAuthenticated">Logout</div>
+
+  <div class="signIn" *ngIf="!isAuthenticated">
+    <button class="signInBtn" routerLink="/auth">Sign In</button>
   </div>
 </div>

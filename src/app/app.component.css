@@ -13,7 +13,7 @@
 }
 
 /* .darkScreen {
-  z-index: 0;
+  z-index: 5;
   position: absolute;
   width: 100vw;
   height: 100vh;

@@ -1,0 +1,12 @@
+.container {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+}
+
+.list-container {
+  display: flex;
+  flex-direction: column;
+}

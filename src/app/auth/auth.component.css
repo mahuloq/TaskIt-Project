@@ -1,12 +1,15 @@
-.container {
-  margin-top: 30px;
-  display: flex;
-  flex-direction: column;
+.test {
+  width: 600px;
 
-  align-items: center;
+  border: solid black 1px;
+  padding: 10px;
+  z-index: 3;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-40%, -40%);
 }
 
-.list-container {
-  display: flex;
-  flex-direction: column;
+.btn-spacing {
+  margin: 10px;
 }
