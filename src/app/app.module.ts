@@ -14,6 +14,7 @@ import { NotificationComponent } from './notification/notification.component';
 import { HttpClientModule } from '@angular/common/http';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { HomeComponent } from './home/home.component';
+import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { HomeComponent } from './home/home.component';
     NotificationComponent,
     LoadingSpinnerComponent,
     HomeComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

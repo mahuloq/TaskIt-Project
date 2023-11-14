@@ -25,7 +25,7 @@ export class AuthService {
   signUp(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyAsYk5fP-Ilfbvjgf6Fw-xRLZqulMffK-g',
+        'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD-yFJsRl-3z4LY2-6naWJ7S2lzye772TU',
         {
           email: email,
           password: password,
@@ -48,7 +48,7 @@ export class AuthService {
   login(email: string, password: string) {
     return this.http
       .post<AuthResponseData>(
-        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyAsYk5fP-Ilfbvjgf6Fw-xRLZqulMffK-g',
+        'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD-yFJsRl-3z4LY2-6naWJ7S2lzye772TU',
         {
           email: email,
           password: password,
@@ -58,6 +58,7 @@ export class AuthService {
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
+          console.log();
           this.handleAuthentication(
             resData.email,
             resData.localId,
