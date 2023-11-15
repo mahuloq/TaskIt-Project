@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, tap } from 'rxjs/operators';
-import { BehaviorSubject, throwError } from 'rxjs';
+import { BehaviorSubject, Subject, throwError } from 'rxjs';
 import { User } from './user.model';
 import { Router } from '@angular/router';
+import { Profile } from '../shared/profile.model';
 
 export interface AuthResponseData {
   kind: string;
@@ -18,6 +19,9 @@ export interface AuthResponseData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
+  AuthDataChanged = new Subject<Profile[]>();
+  profileInfo: Profile[] = [];
+
   private tokenExpirationTimer: any;
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -41,6 +45,8 @@ export class AuthService {
             resData.idToken,
             +resData.expiresIn
           );
+          // this.profileInfo = this.user
+          // this.AuthDataChanged.next(this.profileInfo)
         })
       );
   }
@@ -58,13 +64,14 @@ export class AuthService {
       .pipe(
         catchError(this.handleError),
         tap((resData) => {
-          console.log();
           this.handleAuthentication(
             resData.email,
             resData.localId,
             resData.idToken,
             +resData.expiresIn
           );
+          this.profileInfo = [this.user.value.email, this.user.value.id];
+          this.AuthDataChanged.next(this.profileInfo);
         })
       );
   }
@@ -92,6 +99,8 @@ export class AuthService {
         new Date(userData._tokenExpirationDate).getTime() -
         new Date().getTime();
       this.autoLogout(expirationDuration);
+      this.profileInfo = [this.user.value.email, this.user.value.id];
+      this.AuthDataChanged.next(this.profileInfo);
     }
   }
 
@@ -122,6 +131,8 @@ export class AuthService {
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
+    this.profileInfo = [this.user.value.email, this.user.value.id];
+    this.AuthDataChanged.next(this.profileInfo);
     localStorage.setItem('userData', JSON.stringify(user));
   }
 

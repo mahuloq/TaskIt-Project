@@ -40,35 +40,35 @@ export class DataStorageService {
       .subscribe();
   }
 
-  saveProfile() {
-    const tasks = this.taskService.getTasks();
-    this.http
-      .put(
-        'https://task-it-2f090-default-rtdb.firebaseio.com/tasks.json',
-        tasks
-      )
-      .subscribe((response) => {
-        console.log(response);
-      });
-  }
+  // saveProfile() {
+  //   const tasks = this.taskService.getTasks();
+  //   this.http
+  //     .put(
+  //       'https://task-it-2f090-default-rtdb.firebaseio.com/profile.json',
+  //       tasks
+  //     )
+  //     .subscribe((response) => {
+  //       console.log(response);
+  //     });
+  // }
 
-  getProfile() {
-    return this.http
-      .get<Task[]>(
-        'https://task-it-2f090-default-rtdb.firebaseio.com/tasks.json'
-      )
-      .pipe(
-        map((tasks) => {
-          return tasks.map((task) => {
-            return {
-              ...task,
-            };
-          });
-        }),
-        tap((tasks) => {
-          this.taskService.setTasks(tasks);
-        })
-      )
-      .subscribe();
-  }
+  // getProfile() {
+  //   return this.http
+  //     .get<Task[]>(
+  //       'https://task-it-2f090-default-rtdb.firebaseio.com/profile.json'
+  //     )
+  //     .pipe(
+  //       map((tasks) => {
+  //         return tasks.map((task) => {
+  //           return {
+  //             ...task,
+  //           };
+  //         });
+  //       }),
+  //       tap((tasks) => {
+  //         this.taskService.setTasks(tasks);
+  //       })
+  //     )
+  //     .subscribe();
+  // }
 }
