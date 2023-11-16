@@ -19,8 +19,8 @@ export interface AuthResponseData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
-  AuthDataChanged = new BehaviorSubject<Profile>(null);
-  profileInfo;
+  AuthDataChanged = new BehaviorSubject<Profile[]>(null);
+  profileInfo = [];
 
   private tokenExpirationTimer: any;
 
@@ -134,7 +134,7 @@ export class AuthService {
     this.profileInfo = [this.user.value.email, this.user.value.id];
     console.log(this.profileInfo);
     console.log('Handle Auth Test');
-    this.AuthDataChanged.next([this.user.value.email, this.user.value.id]);
+    this.AuthDataChanged.next(this.profileInfo);
     localStorage.setItem('userData', JSON.stringify(user));
   }
 
@@ -160,4 +160,6 @@ export class AuthService {
     }
     return throwError(() => errorMessage);
   }
+
+  passProfile() {}
 }
