@@ -2,23 +2,17 @@ import { Injectable, OnInit } from '@angular/core';
 
 import { Subject } from 'rxjs';
 import { Profile } from './profile.model';
-import { AuthResponseData, AuthService } from '../auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService implements OnInit {
   profileStateChange = new Subject<any>();
   profile: Profile[] = [];
 
-  constructor(private authService: AuthService) {}
+  constructor() {}
 
-  ngOnInit(): void {
-    this.authService.AuthDataChanged.subscribe((data) => {
-      console.log('ng On init test');
-      this.handleProfile(data.email, data.userId);
-    });
-  }
+  ngOnInit(): void {}
 
-  private handleProfile(email: any, userId: string) {
+  public handleProfile(email: any, userId: string) {
     this.setProfile([email, userId]);
     console.log('handleProfile Test');
   }
