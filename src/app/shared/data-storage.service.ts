@@ -14,6 +14,8 @@ export class DataStorageService {
     private profileService: ProfileService
   ) {}
 
+  uniqueID;
+
   saveTasks() {
     const tasks = this.taskService.getTasks();
     this.http
@@ -21,9 +23,7 @@ export class DataStorageService {
         'https://task-it-2f090-default-rtdb.firebaseio.com/tasks.json',
         tasks
       )
-      .subscribe((response) => {
-        console.log(response);
-      });
+      .subscribe((response) => {});
   }
 
   getTasks() {
@@ -50,7 +50,7 @@ export class DataStorageService {
     const profile = this.profileService.getProfile();
     this.http
       .put(
-        'https://task-it-2f090-default-rtdb.firebaseio.com/profile.json',
+        `https://task-it-2f090-default-rtdb.firebaseio.com/profile/${this.uniqueID}.json`,
         profile
       )
       .subscribe((response) => {
@@ -60,17 +60,10 @@ export class DataStorageService {
 
   getProfile() {
     return this.http
-      .get<ProfileData[]>(
-        'https://task-it-2f090-default-rtdb.firebaseio.com/profile.json'
+      .get<ProfileData>(
+        `https://task-it-2f090-default-rtdb.firebaseio.com/profile/${this.uniqueID}.json`
       )
       .pipe(
-        map((profiles) => {
-          return profiles.map((profile) => {
-            return {
-              ...profile,
-            };
-          });
-        }),
         tap((profiles) => {
           this.profileService.setProfile(profiles);
         })

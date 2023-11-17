@@ -26,7 +26,7 @@
   </div>
 
   <div class="profile" *ngIf="isAuthenticated">
-    <img class="profilePic" [src]="userImage" alt="" routerLink="profile" />
+    <img class="profilePic" [src]="userPic" alt="" routerLink="profile" />
     <div class="profbox">
       <div class="name">{{ userName }}</div>
       <div class="email">{{ userEmail }}</div>

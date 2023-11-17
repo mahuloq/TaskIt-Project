@@ -13,11 +13,12 @@ import { Profile } from '../shared/profile.model';
 export class SidebarComponent implements OnInit {
   isAuthenticated = false;
   private userSub: Subscription;
+  private profileSub: Subscription;
 
   profile = new Profile('', '');
   subscription: Subscription;
 
-  userImage =
+  userPic =
     'https://ih1.redbubble.net/image.1362253646.0602/st,small,845x845-pad,1000x1000,f8f8f8.jpg';
 
   userName = 'Matt';
@@ -30,24 +31,35 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe((user) => {
-      this.isAuthenticated = !!user;
-    });
+      if ((this.isAuthenticated = !!user)) {
+        this.subscription = this.authService.AuthDataChanged.subscribe(
+          (profile) => {
+            console.log('ng On init test');
+            console.log(profile);
+            this.profileService.handleProfile(profile);
+          }
+        );
 
-    this.subscription = this.authService.AuthDataChanged.subscribe(
-      (profile) => {
-        console.log('ng On init test');
-        console.log(profile);
-        this.profileService.handleProfile(profile);
+        this.profileService.profileStateChange.subscribe((profile) => {
+          this.profile = profile;
+          console.log(this.profile);
+          console.log('sidebar component test 2');
+          this.userEmail = this.profile.email;
+          // this.userName = this.profile.userName;
+          // this.userImage = this.profile.userImage;
+        });
+
+        this.profileService.profileDataChange.subscribe((data) => {
+          console.log(this.userPic);
+          this.userName = data.userName;
+          if (data.userImage !== null) {
+            this.userPic = data.userImage;
+          } else {
+            this.userPic = this.userPic;
+          }
+          console.log(this.userPic);
+        });
       }
-    );
-
-    this.profileService.profileStateChange.subscribe((profile) => {
-      this.profile = profile;
-      console.log(this.profile);
-      console.log('sidebar component test 2');
-      this.userEmail = this.profile.email;
-      // this.userName = this.profile.userName;
-      // this.userImage = this.profile.userImage;
     });
   }
   logout() {
