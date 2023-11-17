@@ -3,10 +3,16 @@ import { Injectable } from '@angular/core';
 import { map, tap, take, exhaustMap } from 'rxjs/operators';
 import { TaskService } from './taskService.service';
 import { Task } from './task.model';
+import { ProfileData } from './profileData.model';
+import { ProfileService } from './profileService.service';
 
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
-  constructor(private http: HttpClient, private taskService: TaskService) {}
+  constructor(
+    private http: HttpClient,
+    private taskService: TaskService,
+    private profileService: ProfileService
+  ) {}
 
   saveTasks() {
     const tasks = this.taskService.getTasks();
@@ -40,35 +46,35 @@ export class DataStorageService {
       .subscribe();
   }
 
-  // saveProfile() {
-  //   const tasks = this.taskService.getTasks();
-  //   this.http
-  //     .put(
-  //       'https://task-it-2f090-default-rtdb.firebaseio.com/profile.json',
-  //       tasks
-  //     )
-  //     .subscribe((response) => {
-  //       console.log(response);
-  //     });
-  // }
+  saveProfile() {
+    const profile = this.profileService.getProfile();
+    this.http
+      .put(
+        'https://task-it-2f090-default-rtdb.firebaseio.com/profile.json',
+        profile
+      )
+      .subscribe((response) => {
+        console.log(response);
+      });
+  }
 
-  // getProfile() {
-  //   return this.http
-  //     .get<Task[]>(
-  //       'https://task-it-2f090-default-rtdb.firebaseio.com/profile.json'
-  //     )
-  //     .pipe(
-  //       map((tasks) => {
-  //         return tasks.map((task) => {
-  //           return {
-  //             ...task,
-  //           };
-  //         });
-  //       }),
-  //       tap((tasks) => {
-  //         this.taskService.setTasks(tasks);
-  //       })
-  //     )
-  //     .subscribe();
-  // }
+  getProfile() {
+    return this.http
+      .get<ProfileData[]>(
+        'https://task-it-2f090-default-rtdb.firebaseio.com/profile.json'
+      )
+      .pipe(
+        map((profiles) => {
+          return profiles.map((profile) => {
+            return {
+              ...profile,
+            };
+          });
+        }),
+        tap((profiles) => {
+          this.profileService.setProfile(profiles);
+        })
+      )
+      .subscribe();
+  }
 }

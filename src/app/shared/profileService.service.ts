@@ -1,29 +1,29 @@
 import { Injectable, OnInit } from '@angular/core';
 
-import { Subject } from 'rxjs';
+import { BehaviorSubject, Subject } from 'rxjs';
 import { Profile } from './profile.model';
+import { ProfileData } from './profileData.model';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService implements OnInit {
-  profileStateChange = new Subject<any>();
-  profile: Profile[] = [];
+  profileStateChange = new BehaviorSubject<Profile>(null);
+  profile: Profile = new Profile('', '');
+  currentProfile: ProfileData = new ProfileData('', '');
 
   constructor() {}
 
   ngOnInit(): void {}
 
-  public handleProfile(email: any, userId: string) {
-    this.setProfile([email, userId]);
+  public handleProfile(profile: Profile) {
+    this.profile = profile;
+    console.log(this.profile);
+    this.profileStateChange.next(profile);
     console.log('handleProfile Test');
   }
 
   getProfile() {
-    return [...this.profile];
+    return this.profile;
   }
 
-  setProfile(profile: Profile[]) {
-    console.log('Set Profile Test');
-    this.profile = profile;
-    this.profileStateChange.next(this.profile);
-  }
+  setProfile(profile) {}
 }

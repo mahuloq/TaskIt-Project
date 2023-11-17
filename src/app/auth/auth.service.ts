@@ -19,8 +19,8 @@ export interface AuthResponseData {
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   user = new BehaviorSubject<User>(null);
-  AuthDataChanged = new BehaviorSubject<Profile[]>(null);
-  profileInfo = [];
+  AuthDataChanged = new BehaviorSubject<Profile>(null);
+  profileInfo: Profile;
 
   private tokenExpirationTimer: any;
 
@@ -71,6 +71,7 @@ export class AuthService {
             +resData.expiresIn
           );
           // this.profileInfo = [this.user.value.email, this.user.value.id];
+          // console.log(this.profileInfo);
           // this.AuthDataChanged.next(this.profileInfo);
         })
       );
@@ -98,9 +99,10 @@ export class AuthService {
       const expirationDuration =
         new Date(userData._tokenExpirationDate).getTime() -
         new Date().getTime();
-      this.autoLogout(expirationDuration);
-      // this.profileInfo = [this.user.value.email, this.user.value.id];
-      // this.AuthDataChanged.next(this.profileInfo);
+      this.profileInfo = new Profile(this.user.value.email, this.user.value.id);
+      console.log('Auto Login Test');
+      console.log(this.profileInfo);
+      this.AuthDataChanged.next(this.profileInfo);
     }
   }
 
@@ -131,7 +133,7 @@ export class AuthService {
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);
     this.autoLogout(expiresIn * 1000);
-    this.profileInfo = [this.user.value.email, this.user.value.id];
+    this.profileInfo = new Profile(this.user.value.email, this.user.value.id);
     console.log(this.profileInfo);
     console.log('Handle Auth Test');
     this.AuthDataChanged.next(this.profileInfo);
