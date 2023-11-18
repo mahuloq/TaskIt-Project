@@ -1,3 +1,29 @@
 .profilePic {
   max-height: 50px;
 }
+
+.loginBox {
+  display: flex;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 500px;
+  flex-direction: column;
+}
+
+input {
+  width: 475px;
+}
+.btn {
+  margin-right: 5px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.userInfo {
+  display: flex;
+}

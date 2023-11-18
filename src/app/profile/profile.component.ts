@@ -15,6 +15,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
   profileForm: FormGroup;
   profile = new ProfileData('', '');
   subscription: Subscription;
+  isLoading = false;
 
   constructor(
     private authService: AuthService,
@@ -31,7 +32,9 @@ export class ProfileComponent implements OnInit, OnDestroy {
     // );
     this.subscription = this.profileService.profileStateChange.subscribe(
       (profile) => {
+        this.isLoading = true;
         setTimeout(() => {
+          this.isLoading = false;
           this.profile = this.profileService.getProfile();
         }, 2000);
 
@@ -52,13 +55,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     const profileChange = { ...this.profileForm.value };
-    if (profileChange.userImage !== null) {
-      this.profileService.saveProfile(profileChange);
-    } else if (profileChange.userImage == null) {
-      this.profileService.saveProfile(this.profileForm.value.userName);
-    } else {
-      this.profileService.saveProfile(profileChange);
-    }
+
+    this.profileService.saveProfile(profileChange);
     this.profileForm.reset();
   }
 

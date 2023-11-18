@@ -1,47 +1,57 @@
-<h1>{{ profile.email }}</h1>
-<h1>{{ profile.userName }}</h1>
-<img class="profilePic" src="{{ profile.userImage }}" alt="" />
-<div class="row overlay">
-  <div class="col-xs-12">
-    <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
-      <div class="row">
-        <div class="col-sm-5 form-group">
-          <div>
-            <label for="userName">Username</label>
-            <input
-              formControlName="userName"
-              type="text"
-              class="form-control"
-              id="userName"
-              name="userName"
-            />
-          </div>
-          <div>
-            <label for="userImage">Profile Picture</label>
-            <input
-              formControlName="userImage"
-              type="text"
-              class="form-control"
-              id="userImage"
-              name="userImage"
-            />
+<div *ngIf="isLoading" style="text-align: center">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+
+<div class="header">
+  <h1>{{ profile.email }}</h1>
+  <div class="userInfo">
+    <h1>{{ profile.userName }}</h1>
+    <img class="profilePic" src="{{ profile.userImage }}" alt="" />
+  </div>
+</div>
+<div class="loginBox">
+  <div class="row overlay">
+    <div class="col-xs-12">
+      <form [formGroup]="profileForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="col-sm-5 form-group">
+            <div>
+              <label for="userName">Username</label>
+              <input
+                formControlName="userName"
+                type="text"
+                class="form-control"
+                id="userName"
+                name="userName"
+              />
+            </div>
+            <div>
+              <label for="userImage">Profile Picture</label>
+              <input
+                formControlName="userImage"
+                type="text"
+                class="form-control"
+                id="userImage"
+                name="userImage"
+              />
+            </div>
           </div>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-cs-12">
-          <button
-            class="btn btn-success"
-            type="submit"
-            [disabled]="!profileForm.valid"
-          >
-            Update
-          </button>
-          <button (click)="onReset()" class="btn btn-danger" type="button">
-            Reset
-          </button>
+        <div class="row">
+          <div class="col-cs-12">
+            <button
+              class="btn btn-success"
+              type="submit"
+              [disabled]="!profileForm.valid"
+            >
+              Update
+            </button>
+            <button (click)="onReset()" class="btn btn-danger" type="button">
+              Reset
+            </button>
+          </div>
         </div>
-      </div>
-    </form>
+      </form>
+    </div>
   </div>
 </div>

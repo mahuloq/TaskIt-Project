@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { ProfileService } from '../shared/profileService.service';
 import { Profile } from '../shared/profile.model';
+import { ProfileData } from '../shared/profileData.model';
 
 @Component({
   selector: 'app-sidebar',
@@ -15,7 +16,7 @@ export class SidebarComponent implements OnInit {
   private userSub: Subscription;
   private profileSub: Subscription;
 
-  profile = new Profile('', '');
+  profile = new ProfileData('', '');
   subscription: Subscription;
 
   userPic =
@@ -32,33 +33,33 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.userSub = this.authService.user.subscribe((user) => {
       if ((this.isAuthenticated = !!user)) {
-        this.subscription = this.authService.AuthDataChanged.subscribe(
-          (profile) => {
-            console.log('ng On init test');
-            console.log(profile);
-            this.profileService.handleProfile(profile);
-          }
-        );
+        setTimeout(() => {
+          this.subscription = this.authService.AuthDataChanged.subscribe(
+            (profile) => {
+              console.log('ng On init test');
+              console.log(profile);
+              this.profileService.handleProfile(profile);
+            }
+          );
 
-        this.profileService.profileStateChange.subscribe((profile) => {
-          this.profile = profile;
-          console.log(this.profile);
-          console.log('sidebar component test 2');
-          this.userEmail = this.profile.email;
-          // this.userName = this.profile.userName;
-          // this.userImage = this.profile.userImage;
-        });
+          this.profileService.profileStateChange.subscribe((profile) => {
+            this.profile = profile;
+            console.log(this.profile);
+            console.log('sidebar component test 2');
+            this.userEmail = this.profile.email;
+          });
 
-        this.profileService.profileDataChange.subscribe((data) => {
-          console.log(this.userPic);
-          this.userName = data.userName;
-          if (data.userImage !== null) {
-            this.userPic = data.userImage;
-          } else {
-            this.userPic = this.userPic;
-          }
-          console.log(this.userPic);
-        });
+          this.profileService.profileDataChange.subscribe((data) => {
+            console.log(data.userName);
+            this.userName = data.userName;
+            if (data.userImage !== null) {
+              this.userPic = data.userImage;
+            } else {
+              this.userPic = this.userPic;
+            }
+            console.log(this.userPic);
+          });
+        }, 1000);
       }
     });
   }
