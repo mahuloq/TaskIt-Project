@@ -14,7 +14,7 @@ export class DataStorageService {
     private profileService: ProfileService
   ) {}
 
-  uniqueID;
+  uniqueID = '3n0xXCIQqBQp1IobLbcYWCIi4ol1';
 
   saveTasks() {
     const tasks = this.taskService.getTasks();
@@ -47,6 +47,7 @@ export class DataStorageService {
   }
 
   saveProfile() {
+    console.log('Save Profile');
     const profile = this.profileService.getProfile();
     this.http
       .put(

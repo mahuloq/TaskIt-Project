@@ -53,5 +53,7 @@ export class ProfileService implements OnInit {
     this.profileDataChange.next(data);
   }
 
-  setProfile(profile) {}
+  setProfile(profile) {
+    this.profile = profile;
+  }
 }

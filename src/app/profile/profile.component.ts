@@ -5,7 +5,7 @@ import { Profile } from '../shared/profile.model';
 import { Subscription } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProfileData } from '../shared/profileData.model';
-
+import { DataStorageService } from 'src/app/shared/data-storage.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -19,7 +19,8 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   constructor(
     private authService: AuthService,
-    private profileService: ProfileService
+    private profileService: ProfileService,
+    private dataService: DataStorageService
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +59,7 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
     this.profileService.saveProfile(profileChange);
     this.profileForm.reset();
+    this.dataService.saveProfile();
   }
 
   onReset() {
